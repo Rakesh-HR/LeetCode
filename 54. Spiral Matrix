@@ -1,0 +1,49 @@
+Given an m x n matrix, return all elements of the matrix in spiral order.
+
+ 
+
+Example 1:
+
+
+Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+Output: [1,2,3,6,9,8,7,4,5]
+
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        int maxb=matrix.length;
+        int maxl=matrix[0].length;
+        
+        System.out.println(maxl+"  "+maxb);
+        int minl=0,minb=0;
+        List l=new ArrayList();
+        while(minl<maxl && minb<maxb){
+            
+            for(int i=minl;i<maxl;i++){
+                l.add(matrix[minb][i]);
+            }
+                        System.out.println(l+" minl= "+minl+" maxl= "+maxl+" minb= "+minb+" maxb= "+maxb);
+
+            minb++;
+            for(int i=minb;i<maxb;i++){
+                l.add(matrix[i][maxl-1]);
+            }            System.out.println(l+" minl= "+minl+" maxl= "+maxl+" minb= "+minb+" maxb= "+maxb);
+
+            maxl--;
+            
+            if(!(minl<maxl && minb<maxb)) break;
+            for(int i=maxl-1;i>=minl;i--){
+                l.add(matrix[maxb-1][i]);
+            }            System.out.println(l+" minl= "+minl+" maxl= "+maxl+" minb= "+minb+" maxb= "+maxb);
+
+            maxb--;
+            for(int i=maxb-1;i>=minb;i--){
+                l.add(matrix[i][minl]);
+            }            System.out.println(l+" minl= "+minl+" maxl= "+maxl+" minb= "+minb+" maxb= "+maxb);
+            
+            minl++;
+            System.out.println(l+" minl= "+minl+" maxl= "+maxl+" minb= "+minb+" maxb= "+maxb);
+        }
+        return l;
+    }
+}
