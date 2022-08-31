@@ -1,0 +1,56 @@
+class Solution {
+    //recursion 
+    /*
+    public int climbStairs(int n) {
+        if(n==0)
+            return 0;
+        if(n==1)
+            return 1;
+        if(n==2)
+            return 2;
+        return climbStairs(n-1)+climbStairs(n-2);
+    }
+    */
+    //recursion+ memoization
+    /*
+    public int climbStairs(int n){
+        Map<Integer, Integer> memo=new HashMap<>();
+        memo.put(1,1);
+        memo.put(2,2);
+        return compute(n,memo);
+    }
+    public int compute(int n, Map<Integer, Integer> m){
+        if(m.containsKey(n))
+            return m.get(n);
+        int x=compute(n-1,m)+compute(n-2,m);
+        m.put(n,x);
+        return x;
+    }
+    */
+    //DP
+    /*
+    public int climbStairs(int n1){
+        int n[]=new int[n1+1];
+        n[0]=0;
+        if(n1>=1) n[1]=1;
+        if(n1>=2) n[2]=2;
+        for(int i =3;i<=n1;i++)
+            n[i]=n[i-1]+n[i-2];
+        return n[n1];
+    }
+    */
+    //Optimized DP
+    public int climbStairs(int n){
+        int n1=1,n2=2,ne=0;
+        if(n<=1)
+            return 1;
+        for(int i=3;i<=n;i++){
+            ne=n1+n2;
+            n1=n2;
+            n2=ne;
+        }
+        return n2;
+        
+    }
+
+}
