@@ -1,0 +1,63 @@
+class Solution {
+    public int orangesRotting(int[][] grid) {
+        List <int[]> rt= new ArrayList<>();
+        int t=0;
+        int n=grid.length,
+            m=grid[0].length;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]==1)
+                    t++;
+                else if(grid[i][j]==2)
+                    rt.add(new int[]{i,j});
+            }
+        }
+        
+        if(t==0)
+            return 0;
+        
+        int count=0;
+        
+        while(t>0){
+            count++;
+            
+            int s=rt.size();
+            int it=t;
+            for(int x=0;x<s;x++){
+                
+                int[] no=rt.get(x);
+                int i=no[0],
+                    j=no[1],
+                    c=0;
+                
+                if(i>0 && grid[i-1][j]==1){
+                    grid[i-1][j]=2;
+                    rt.add(new int[]{i-1,j});
+                    c++;            
+                }            
+
+                if(i<n-1 && grid[i+1][j]==1){
+                    grid[i+1][j]=2;
+                    rt.add(new int[]{i+1,j});
+                    c++;
+                }           
+                if(j>0 && grid[i][j-1]==1){
+                    grid[i][j-1]=2;
+                    rt.add(new int[]{i,j-1});
+                    c++;           
+                }           
+                if(j<m-1 && grid[i][j+1]==1){
+                    grid[i][j+1]=2;
+                    rt.add(new int[]{i,j+1});
+                    c++;
+                }           
+                if(c!=0)
+                    t-=c;
+            }
+            if(it==t)
+                return -1;
+        }
+        return count;
+    }
+}
