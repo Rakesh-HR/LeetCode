@@ -1,32 +1,49 @@
 class Solution {
+    
     /*
-    public int rob(int[] nums) {
-        int l=nums.length;
-        int [] rob = new int[l];
-        if(l==0)
-            return 0;
-        if(l==1)
-            return nums[0];
+    public int minimumTotal(List<List<Integer>> tr) {
         
-        rob[0]=nums[0];
-        rob[1]=Math.max(nums[0],nums[1]);
-        for(int i=2;i<l;i++){
-            rob[i]=Math.max(nums[i]+rob[i-2],rob[i-1]);
+        for(int j=1;j<tr.size();j++){
+            int num1=Integer.MAX_VALUE,num2=Integer.MAX_VALUE;
+            for(int k=0;k<tr.get(j).size();k++)
+            {
+                if(k==0){
+                    int m=tr.get(j-1).get(0)+tr.get(j).get(0);
+                    tr.get(j).set(0,m);
+                    //System.out.println("k==0");
+                }
+                else if(k==tr.get(j).size()-1){
+                    int m=tr.get(j-1).get(k-1)+tr.get(j).get(k);
+                    tr.get(j).set(k,m);
+                    //System.out.println("k==n");
+                }
+                else{
+                    int m=tr.get(j).get(k)+Math.min(tr.get(j-1).get(k),tr.get(j-1).get(k-1));
+                    tr.get(j).set(k,m);
+                    //System.out.println("k=="+k);
+                }
+                
+                //System.out.println("j ="+j+" k= "+k+" val ="+tr.get(j).get(k));
+                    
+            }
         }
-        return rob[l-1];
-    }
-    */
-    public int rob(int[] nums) {
-        int l=nums.length;
-        if(l==0)
-            return 0;
-
-        int num1=0, num2=0;
-        for(int i=0;i<l;i++){
-            int temp=num1;
-            num1=num2;
-            num2=Math.max(nums[i]+temp,num2);
-        }
-        return num2;
+        
+        int j=tr.size()-1;
+        int index=tr.get(j).size(),m=Integer.MAX_VALUE;
+        for(int k=0;k<index;k++)
+            m=Math.min(m,tr.get(j).get(k));
+        
+         return m;
+        
+        */
+        public int minimumTotal(List<List<Integer>> triangle) {
+            int[] A = new int[triangle.size()+1];
+            for(int i=triangle.size()-1;i>=0;i--){
+                for(int j=0;j<triangle.get(i).size();j++){
+                    A[j] = Math.min(A[j],A[j+1])+triangle.get(i).get(j);
+                }
+            }
+            return A[0];
+        
     }
 }
