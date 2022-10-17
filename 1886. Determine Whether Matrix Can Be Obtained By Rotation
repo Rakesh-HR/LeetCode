@@ -1,0 +1,20 @@
+class Solution {
+    public boolean findRotation(int[][] mat, int[][] target) {
+        int n = mat.length;
+        boolean deg90=true,deg180=true,deg270=true, deg360=true;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                if(deg90 && mat[i][j]!=target[j][n-i-1])
+                    deg90= false;
+                if(deg180 && mat[i][j]!=target[n-i-1][n-j-1])
+                    deg180= false;
+                if(deg270 && mat[i][j]!=target[n-j-1][i])
+                    deg270= false;
+                if(deg360 && mat[i][j]!=target[i][j])
+                    deg360= false;
+            }
+        }
+        return deg90||deg180||deg270||deg360;
+    }
+}
