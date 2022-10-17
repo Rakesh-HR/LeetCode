@@ -1,0 +1,20 @@
+class Solution {
+    public void rotate(int[][] m) {
+        int n=m.length;
+        int l=0,r=n-1,t=0,b=n-1;
+        int temp;
+        while(t<=b){
+            for(int i=l;i<r;i++){ 
+                temp=m[t][i];
+                m[t][i]=m[n-1-i][t];
+                m[n-1-i][t]=m[n-1-t][n-1-i];
+                m[n-1-t][n-1-i]=m[i][n-1-t];
+                m[i][n-1-t]=temp;
+            }
+            t++;
+            l++;
+            r--;   
+            b--;        
+        }
+    }
+}
