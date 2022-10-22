@@ -1,0 +1,29 @@
+class Solution {
+    public int[][] kClosest(int[][] points, int k) {
+        
+        /* Approach 1
+        
+        Arrays.sort(points, (p,q)->p[0]*p[0]+p[1]*p[1]-q[0]*q[0]-q[1]*q[1]);
+        return Arrays.copyOfRange(points,0,k);
+
+        */
+        
+        /* Approach 2*/
+        PriorityQueue<int[]> pq= new PriorityQueue<int[]>((p,q)-> -p[0] * p[0] - p[1] * p[1] + q[0] * q[0] + q[1] * q[1]);
+        
+        for(int [] val:points){
+            pq.offer(val);
+            if(pq.size()>k)
+                pq.poll();
+        }
+        
+        int[][] res=new int[k][2];
+        while(k-- > 0)
+        {
+            res[k] =pq.poll();
+        }    
+        
+        return res;
+        
+    }
+}
