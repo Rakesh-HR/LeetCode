@@ -1,0 +1,27 @@
+class Solution {
+    Stack<String> stk = new Stack<>();;
+    List<String> list = new ArrayList<>();;
+    public List<String> generateParenthesis(int n) {
+        permute(0,0, n);
+        return list;
+    }
+
+    public void permute(int l, int r, int n){
+        if(l==r && r==n){
+            StringBuilder str=new StringBuilder();
+            for(String s:stk)
+                str.append(s);
+             list.add(str.toString());
+        }
+        if(r<l){
+            stk.push(")");
+            permute(l,r+1,n);
+            stk.pop();
+        }
+        if(l<n){
+            stk.push("(");
+            permute(l+1,r,n);
+            stk.pop();
+        }
+    }
+}
